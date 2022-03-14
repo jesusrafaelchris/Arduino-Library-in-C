@@ -1,0 +1,5 @@
+#!/bin/bash
+ 
+avr-gcc -Wall -g -Os -mmcu=atmega328p $1.c $2.c -o $1.elf
+avr-objcopy -O ihex $1.elf $1.hex
+avrdude -p atmega328p -P $3 -c arduino -b 115200 -D -U flash:w:$1.hex:i
